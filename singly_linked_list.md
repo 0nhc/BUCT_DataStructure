@@ -2,8 +2,8 @@
 ## 单链表结构
 ```cpp
 struct Node{
-    int data;
-    Node* next;
+    int data; //节点内包含的数据（以int型为例）
+    Node* next; //指向的下一个节点
 };
 ```
 
@@ -14,14 +14,16 @@ typedef Node* List;
 
 ##  链表初始化
 ```cpp
-bool InitList(List &ptr_in) //输入一个链表的指针
+bool InitList(List &ptr_in)
 {
-    ptr_in = new Node; //开辟内存空间
+    ptr_in = new Node;
     ptr_in->next=NULL;
     return true;
 }
 ```
 
+##  在链表尾部添加数据
+```cpp
 bool AddNode(List &ptr_in, int data)
 {
     List p = ptr_in;
@@ -36,7 +38,10 @@ bool AddNode(List &ptr_in, int data)
     p->next=add;
     return true;
 }
+```
 
+## 打印链表数据
+```cpp
 void PrintList(List &ptr_in)
 {
     List p = ptr_in;
@@ -51,7 +56,10 @@ void PrintList(List &ptr_in)
     }
     cout<<endl;
 }
+```
 
+## 销毁链表（内存空间释放）
+```cpp
 int DestroyList(List &ptr_in)
 {
     List p = ptr_in;
@@ -64,7 +72,10 @@ int DestroyList(List &ptr_in)
     }
     return 0;
 }
+```
 
+## 清空链表（只保留头节点 其余释放）
+```cpp
 int ClearList(List &ptr_in)
 {
     List p = ptr_in;
@@ -79,7 +90,10 @@ int ClearList(List &ptr_in)
     ptr_in->next=NULL;
     return 0;
 }
+```
 
+## 链表插入数据（index是从0开始计数）
+```cpp
 void InsertList(List &ptr_in, int after_which_index, int data)
 {
     List p = ptr_in;
@@ -94,7 +108,11 @@ void InsertList(List &ptr_in, int after_which_index, int data)
     insert->next = p->next;
     p->next = insert;
 }
+```
 
+## 链表反转
+具体思想讲解可参考[该CSDN文档](https://blog.csdn.net/v_xchen_v/article/details/53067448)
+```cpp
 void ReverseList(List &ptr_in)
 {
     List p,q;
@@ -108,7 +126,10 @@ void ReverseList(List &ptr_in)
         ptr_in->next=q;
     }
 }
+```
 
+## 去除链表内的重复数据
+```cpp
 void RemoveDuplicate(List &ptr_in)
 {
     List p = ptr_in;
