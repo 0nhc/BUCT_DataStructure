@@ -1,26 +1,26 @@
 # singly linked list
+## 单链表结构
 ```cpp
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <math.h>
-#include <algorithm>
-
-using namespace std;
-
 struct Node{
     int data;
     Node* next;
 };
+```
 
+## 注：以下Node指针均写为List
+```cpp
 typedef Node* List;
+```
 
-bool InitList(List &ptr_in)
+##  链表初始化
+```cpp
+bool InitList(List &ptr_in) //输入一个链表的指针
 {
-    ptr_in = new Node;
+    ptr_in = new Node; //开辟内存空间
     ptr_in->next=NULL;
     return true;
 }
+```
 
 bool AddNode(List &ptr_in, int data)
 {
