@@ -30,6 +30,7 @@ class LNode
         void print();
         void reverse();
         void removeduplicate();
+        void clear();
 };
 
 int LNode::len()
@@ -280,6 +281,25 @@ void LNode::removeduplicate()
             }
             p=p->next;
         }
+    }
+}
+
+void LNode::clear()
+{
+    LNode* p = this;
+    LNode* del;
+    LNode* head=p;
+    if(p->next)
+    {
+        p=p->next;
+        while(p!=NULL)
+        {
+            del=p;
+            p=p->next;
+            free(del);
+        }
+        head->next=NULL;
+        p=head;
     }
 }
 ```
