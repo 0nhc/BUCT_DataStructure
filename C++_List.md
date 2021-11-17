@@ -28,6 +28,8 @@ class LNode
         int max(); //element type can be changed
         int min(); //element type can be changed
         void print();
+        void reverse();
+        void removeduplicate();
 };
 
 int LNode::len()
@@ -231,5 +233,53 @@ void LNode::print()
         cout<<p->data<<' ';
     }
     cout<<endl;
+}
+
+void LNode::reverse()
+{
+    LNode* p;
+    LNode* q;
+    LNode* ptr=this;
+    if(ptr->next)
+    {
+        p=ptr->next;
+        ptr->next=NULL;
+        while(p)
+        {
+            q=p;
+            p=p->next;
+            q->next=ptr->next;
+            ptr->next=q;
+        }
+    }
+    else
+    {
+        cout<<"error, empty list";
+    }
+}
+
+void LNode::removeduplicate()
+{
+    LNode* p=this;
+    if(p->next)
+    {
+        p=p->next;
+        while(p)
+        {
+            LNode* q=p;
+            while(q->next)
+            {
+                    LNode* qNext = q->next;
+                    if(qNext->data==p->data)
+                    {
+                        p->next=qNext->next;
+                        free(qNext);
+                    }
+                    else
+                        q=q->next;
+            }
+            p=p->next;
+        }
+    }
 }
 ```
