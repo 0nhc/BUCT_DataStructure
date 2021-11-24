@@ -7,299 +7,234 @@
 
 using namespace std;
 
-class LNode
+template<class T> class LNode
 {
+    // int len()
+    // T get(int index)
+    // void change(int index, T data)
+    // void append(T data)
+    // T pop(int index=-1)
+    // void print()
+    // void reverse()
+    // void removeduplicate()
+    // void clear()
     public:
         LNode()
         {
-            this->last=NULL;
             this->next=NULL;
         }
 
-        int data; //element type can be changed
+        T data;
         LNode* next;
-        LNode* last;
 
-        int len();
-        int get(int index); //element type can be changed
-        void change(int index, int data); //element type can be changed
-        void append(int data); //element type can be changed
-        int pop(int index=-1); //element type can be changed
-        int max(); //element type can be changed
-        int min(); //element type can be changed
-        void print();
-        void reverse();
-        void removeduplicate();
-        void clear();
-};
-
-int LNode::len()
-{
-    LNode* p = this;
-    unsigned int count=0;
-    while(p->next)
-    {
-        p=p->next;
-        count++;
-    }
-    return count;
-}
-
-int LNode::get(int index)
-{
-    LNode* p = this;
-    if(index >= 0)
-    {
-        if(index+1>this->len())
+        int len() //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
         {
-            cout<<"error, index overflow"<<endl;
-            return 0;
-        }
-        else
-        {
-            for(int i=0;i<index+1;i++)
-                p=p->next;
-            return p->data;
-        }
-    }
-    else
-    {
-        if(-index>this->len())
-        {
-            cout<<"error, index overflow"<<endl;
-            return 0;
-        }
-        else
-        {
-            for(int i=0;i<(this->len()+index+1);i++)
-                p=p->next;
-            return p->data;
-        }
-    }
-}
-
-void LNode::change(int index, int data) //element type can be changed
-{
-    LNode* p = this;
-    if(index >= 0)
-    {
-        if(index+1>this->len())
-            cout<<"error, index overflow"<<endl;
-        else
-        {
-            for(int i=0;i<index+1;i++)
-                p=p->next;
-            p->data = data;
-        }
-    }
-    else
-    {
-        if(-index>this->len())
-            cout<<"error, index overflow"<<endl;
-        else
-        {
-            for(int i=0;i<(this->len()+index+1);i++)
-                p=p->next;
-            p->data = data;
-        }
-    }
-}
-
-void LNode::append(int data) //element type can be changed
-{
-    LNode* p = this;
-    LNode* node;
-    node = new LNode;
-    node->data = data;
-    node->next = NULL;
-    while(p->next)
-        p=p->next;
-    p->next = node;
-    node->last = p;
-}
-
-int LNode::pop(int index) //element type can be changed
-{
-    LNode* p = this;
-    int result=0; //element type can be changed
-    if(index >= 0)
-    {
-        if(index+1>this->len())
-            cout<<"error, index overflow"<<endl;
-        else
-        {
-            for(int i=0;i<index+1;i++)
-                p=p->next;
-            if(p->next && p->last)
+            LNode* p = this;
+            unsigned int count=0;
+            while(p->next)
             {
-                LNode* pNext = p->next;
-                LNode* pLast = p->last;
-                pLast->next = pNext;
-                pNext->last = pLast;
-                result = p->data;
-                free(p);
+                p=p->next;
+                count++;
             }
-            else if(!p->next && p->last)
+            return count;
+        }
+
+        T get(int index) //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
+        {
+            LNode* p = this;
+            if(index >= 0)
             {
-                LNode* pLast = p->last;
-                pLast->next = NULL;
-                result = p->data;
-                free(p);
+                if(index+1>this->len())
+                {
+                    cout<<"error, index overflow"<<endl;
+                    return 0;
+                }
+                else
+                {
+                    for(int i=0;i<index+1;i++)
+                        p=p->next;
+                    return p->data;
+                }
+            }
+            else
+            {
+                if(-index>this->len())
+                {
+                    cout<<"error, index overflow"<<endl;
+                    return 0;
+                }
+                else
+                {
+                    for(int i=0;i<(this->len()+index+1);i++)
+                        p=p->next;
+                    return p->data;
+                }
             }
         }
-    }
-    else
-    {
-        if(-index>this->len())
-            cout<<"error, index overflow"<<endl;
-        else
+        void change(int index, T data) //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
         {
-            for(int i=0;i<(this->len()+index+1);i++)
+            LNode* p = this;
+            if(index >= 0)
+            {
+                if(index+1>this->len())
+                    cout<<"error, index overflow"<<endl;
+                else
+                {
+                    for(int i=0;i<index+1;i++)
+                        p=p->next;
+                    p->data = data;
+                }
+            }
+            else
+            {
+                if(-index>this->len())
+                    cout<<"error, index overflow"<<endl;
+                else
+                {
+                    for(int i=0;i<(this->len()+index+1);i++)
+                        p=p->next;
+                    p->data = data;
+                }
+            }
+        }
+        void append(T data) //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
+        {
+            LNode* p = this;
+            LNode* node;
+            node = new LNode;
+            node->data = data;
+            node->next = NULL;
+            while(p->next)
                 p=p->next;
-            if(p->next && p->last)
+            p->next = node;
+        }
+        T pop(int index=-1)  //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
+        {
+            LNode* p = this;
+            T result;
+            if(index >= 0)
             {
-                LNode* pNext = p->next;
-                LNode* pLast = p->last;
-                pLast->next = pNext;
-                pNext->last = pLast;
-                result = p->data;
-                free(p);
-            }
-            else if(!p->next && p->last)
-            {
-                LNode* pLast = p->last;
-                pLast->next = NULL;
-                result = p->data;
-                free(p);
-            }
-        }
-    }
-    return result;
-}
-
-int LNode::max() //element type can be changed
-{
-    LNode *p = this;
-    int max;
-    if(p->next)
-    {
-        p=p->next;
-        max=p->data;
-        while(p->next)
-        {
-            p=p->next;
-            if(p->data>max)
-                max=p->data;
-        }
-    }
-    else
-    {
-        cout<<"error, index overflow";
-        return 0;
-    }
-    
-    return max;
-}
-
-int LNode::min() //element type can be changed
-{
-    LNode *p = this;
-    int min;
-    if(p->next)
-    {
-        p=p->next;
-        min=p->data;
-        while(p->next)
-        {
-            p=p->next;
-            if(p->data<min)
-                min=p->data;
-        }
-    }
-    else
-    {
-        cout<<"error, index overflow";
-        return 0;
-    }
-    
-    return min;
-}
-
-void LNode::print()
-{
-    LNode* p = this;
-    while(p->next)
-    {
-        p=p->next;
-        cout<<p->data<<' ';
-    }
-    cout<<endl;
-}
-
-void LNode::reverse()
-{
-    LNode* p;
-    LNode* q;
-    LNode* ptr=this;
-    if(ptr->next)
-    {
-        p=ptr->next;
-        ptr->next=NULL;
-        while(p)
-        {
-            q=p;
-            p=p->next;
-            q->next=ptr->next;
-            ptr->next=q;
-        }
-    }
-    else
-    {
-        cout<<"error, empty list";
-    }
-}
-
-void LNode::removeduplicate()
-{
-    LNode* p=this;
-    if(p->next)
-    {
-        p=p->next;
-        while(p)
-        {
-            LNode* q=p;
-            while(q->next)
-            {
-                    LNode* qNext = q->next;
-                    if(qNext->data==p->data)
+                if(index+1>this->len())
+                    cout<<"error, index overflow"<<endl;
+                else
+                {
+                    for(int i=0;i<index;i++)
+                        p=p->next;
+                    LNode* pNext = p->next;
+                    if(pNext->next)
                     {
-                        p->next=qNext->next;
-                        free(qNext);
+                        LNode* pNextNext = pNext->next;
+                        p->next = pNextNext;
+                        result = pNext->data;
+                        free(pNext);
                     }
-                    else
-                        q=q->next;
+                    else if(!pNext->next)
+                    {
+                        p->next = NULL;
+                        result = pNext->data;
+                        free(pNext);
+                    }
+                }
             }
-            p=p->next;
+            else
+            {
+                if(-index>this->len())
+                    cout<<"error, index overflow"<<endl;
+                else
+                {
+                    for(int i=0;i<(this->len()+index);i++)
+                        p=p->next;
+                    LNode* pNext = p->next;
+                    if(pNext->next)
+                    {
+                        LNode* pNextNext = pNext->next;
+                        p->next = pNextNext;
+                        result = pNext->data;
+                        free(pNext);
+                    }
+                    else if(!pNext->next)
+                    {
+                        p->next = NULL;
+                        result = pNext->data;
+                        free(pNext);
+                    }
+                }
+            }
+            return result;
         }
-    }
-}
-
-void LNode::clear()
-{
-    LNode* p = this;
-    LNode* del;
-    LNode* head=p;
-    if(p->next)
-    {
-        p=p->next;
-        while(p!=NULL)
+        void print() //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
         {
-            del=p;
-            p=p->next;
-            free(del);
+            LNode* p = this;
+            while(p->next)
+            {
+                p=p->next;
+                cout<<p->data<<' ';
+            }
+            cout<<endl;
         }
-        head->next=NULL;
-        p=head;
-    }
-}
+        void reverse() //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
+        {
+            LNode* p;
+            LNode* q;
+            LNode* ptr=this;
+            if(ptr->next)
+            {
+                p=ptr->next;
+                ptr->next=NULL;
+                while(p)
+                {
+                    q=p;
+                    p=p->next;
+                    q->next=ptr->next;
+                    ptr->next=q;
+                }
+            }
+            else
+            {
+                cout<<"error, empty list";
+            }
+        }
+        void removeduplicate() //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
+        {
+            LNode* p=this;
+            if(p->next)
+            {
+                p=p->next;
+                while(p)
+                {
+                    LNode* q=p;
+                    while(q->next)
+                    {
+                            LNode* qNext = q->next;
+                            if(qNext->data==p->data)
+                            {
+                                p->next=qNext->next;
+                                free(qNext);
+                            }
+                            else
+                                q=q->next;
+                    }
+                    p=p->next;
+                }
+            }
+        }
+        void clear() //FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION FUNCTION
+        {
+            LNode* p = this;
+            LNode* del;
+            LNode* head=p;
+            if(p->next)
+            {
+                p=p->next;
+                while(p!=NULL)
+                {
+                    del=p;
+                    p=p->next;
+                    free(del);
+                }
+                head->next=NULL;
+                p=head;
+            }
+        }
+};
 ```
